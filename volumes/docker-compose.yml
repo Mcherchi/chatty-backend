@@ -1,0 +1,19 @@
+services:
+  mongodb:
+    container_name: mongodb_container
+    image: mongo:latest
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./docker-volumes/mongodb:/data/db
+
+  redis:
+    container_name: redis_container
+    image: redis:latest
+    restart: always
+    command: redis-server --loglevel warning
+    ports:
+      - '6379:6379'
+    volumes:
+      - ./docker-volumes/cache:/data
