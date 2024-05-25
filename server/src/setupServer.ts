@@ -1,4 +1,5 @@
 import http from 'http';
+import 'express-async-errors';
 import { Application, json, urlencoded, Response, Request, NextFunction } from 'express';
 import compression from 'compression';
 import cookieSession from 'cookie-session';
@@ -8,12 +9,11 @@ import hpp from 'hpp';
 import { StatusCodes } from 'http-status-codes';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
-import 'express-async-errors';
-import { config } from './config';
+import { config } from '@root/config';
+import applicationRoute from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
-import applicationRoute from './routes';
-import { CustomError, IErrorPayload } from './shared/globals/helpers/error-handler';
 import { Logger } from 'winston';
+import { CustomError, IErrorPayload } from '@global/helpers/error-handler';
 
 const log: Logger = config.createLogger('server');
 
