@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import winston, { Logger } from 'winston';
+import cloudinary from 'cloudinary';
 
 dotenv.config({});
 
@@ -12,6 +13,10 @@ class Config {
   public SECRET_KEY_TWO: string | undefined;
   public CLIENT_URL: string | undefined;
   public SERVER_PORT: string | undefined;
+  public CLOUD_NAME: string | undefined;
+  public CLOUD_API_KEY: string | undefined;
+  public CLOUD_API_SECRETS: string | undefined;
+  public BCRYPT_SALT_ROUNDS: string | undefined;
 
   private readonly DEFAULT_SERVER_PORT = '4000';
 
@@ -24,6 +29,10 @@ class Config {
     this.SECRET_KEY_TWO = process.env.SECRET_KEY_TWO || '';
     this.CLIENT_URL = process.env.CLIENT_URL || '';
     this.SERVER_PORT = process.env.SERVER_PORT || this.DEFAULT_SERVER_PORT;
+    this.CLOUD_NAME = process.env.CLOUD_NAME || '';
+    this.CLOUD_API_KEY = process.env.CLOUD_API_KEY || '';
+    this.CLOUD_API_SECRETS = process.env.CLOUD_API_SECRETS || '';
+    this.BCRYPT_SALT_ROUNDS = process.env.BCRYPT_SALT_ROUNDS || '';
   }
 
   public createLogger(name: string): Logger {
@@ -31,8 +40,7 @@ class Config {
       console: {
         level: 'debug',
         handleExceptions: true,
-        json: false,
-        colorize: true
+        json: false
       }
     };
 
@@ -45,7 +53,6 @@ class Config {
     );
 
     return winston.createLogger({
-      level: 'debug',
       format: customFormat,
       defaultMeta: { service: name },
       transports: [new winston.transports.Console(options.console)],
@@ -59,6 +66,14 @@ class Config {
         throw new Error(`Configuration ${key} is undefined`);
       }
     }
+  }
+
+  public cloudinaryConfig(): void {
+    cloudinary.v2.config({
+      cloud_name: this.CLOUD_NAME,
+      api_key: this.CLOUD_API_KEY,
+      api_secret: this.CLOUD_API_SECRETS
+    });
   }
 }
 

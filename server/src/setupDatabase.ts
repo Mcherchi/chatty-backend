@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { config } from '@root/config';
 import { Logger } from 'winston';
+import { redisConnection } from '@service/redis/redis.connection';
 
 const log: Logger = config.createLogger('setUpDatabase');
 
@@ -10,6 +11,7 @@ export default () => {
       .connect(`${config.MONGO_URL}`)
       .then(() => {
         log.info('Successfully connected to database');
+        redisConnection.connect();
       })
       .catch((err) => {
         log.error('Error connecting to database. Exiting now...', err);
