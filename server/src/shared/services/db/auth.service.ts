@@ -30,6 +30,29 @@ class AuthService {
     return user;
   }
 
+  public async updatePasswordResetToken(authId: string, token: string, tokenExpiration: Date): Promise<void> {
+    await AuthModel.updateOne(
+      { _id: authId },
+      {
+        passwordResetToken: token,
+        passwordResetExpires: tokenExpiration
+      }
+    );
+  }
+
+  public async getUserByPasswordToken(token: string): Promise<IAuthDocument> {
+    const user: IAuthDocument = (await AuthModel.findOne({
+      passwordResetToken: token,
+      passwordResetExpires: { $gt: Date.now() }
+    }).exec()) as IAuthDocument;
+
+    return user;
+  }
+
+  public async updatePassword(id: string | ObjectId, password: string): Promise<void> {
+    await AuthModel.updateOne({ _id: id }, { $set: { password, passwordResetToken: '', passwordResetExpires: new Date() } }).exec();
+  }
+
   public signToken(userId: ObjectId | string, uId: string, email: string, username: string): string {
     return sign(
       {

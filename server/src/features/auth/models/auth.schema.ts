@@ -38,7 +38,7 @@ authSchema.methods.comparePassword = async function (password: string): Promise<
 };
 
 authSchema.methods.hashPassword = async function (password: string): Promise<string> {
-  return hash(password, `${config.BCRYPT_SALT_ROUNDS}`);
+  return hash(password, parseInt(`${config.BCRYPT_SALT_ROUNDS}`));
 };
 
 const AuthModel: Model<IAuthDocument> = model<IAuthDocument>('Auth', authSchema, 'Auth');
