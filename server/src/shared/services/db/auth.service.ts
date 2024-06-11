@@ -53,13 +53,14 @@ class AuthService {
     await AuthModel.updateOne({ _id: id }, { $set: { password, passwordResetToken: '', passwordResetExpires: new Date() } }).exec();
   }
 
-  public signToken(userId: ObjectId | string, uId: string, email: string, username: string): string {
+  public signToken(userId: ObjectId | string, uId: string, email: string, username: string, avatarColor: string): string {
     return sign(
       {
         userId,
         uId,
         email,
-        username
+        username,
+        avatarColor
       },
       `${config.JWT_TOKEN}`
     );

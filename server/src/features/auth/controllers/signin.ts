@@ -32,7 +32,13 @@ export class SignIn {
 
     const user: IUserDocument = await userService.getUserByAuthId(`${existingUser._id}`);
 
-    const userJwt: string = authService.signToken(user._id, existingUser.uId, existingUser.email, existingUser.username);
+    const userJwt: string = authService.signToken(
+      user._id,
+      existingUser.uId,
+      existingUser.email,
+      existingUser.username,
+      existingUser.avatarColor
+    );
 
     req.session = { jwt: userJwt };
 

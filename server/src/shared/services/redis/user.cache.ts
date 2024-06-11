@@ -1,5 +1,5 @@
 import { IUserDocument } from '@user/interfaces/user.interface';
-import { BaseCache } from './base.cache';
+import { BaseCache } from '@service/redis/base.cache';
 import { ServerError } from '@global/helpers/error-handler';
 import { Helpers } from '@global/helpers/helpers';
 

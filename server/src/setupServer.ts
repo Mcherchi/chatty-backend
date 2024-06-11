@@ -14,6 +14,7 @@ import applicationRoute from '@root/routes';
 import { createAdapter } from '@socket.io/redis-adapter';
 import { Logger } from 'winston';
 import { CustomError, IErrorPayload } from '@global/helpers/error-handler';
+import { SocketIOPostHandler } from '@socket/post.socket';
 
 const log: Logger = config.createLogger('server');
 
@@ -117,6 +118,7 @@ export class ChattyServer {
   }
 
   private socketIOConnection(io: Server): void {
-    console.log(io);
+    const postSocketHandler: SocketIOPostHandler = new SocketIOPostHandler(io);
+    postSocketHandler.listen();
   }
 }
