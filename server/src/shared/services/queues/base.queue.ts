@@ -7,8 +7,9 @@ import { config } from '@root/config';
 import { IAuthJob } from '@auth/interfaces/auth.interface';
 import { IEmailJob, IUserJob } from '@user/interfaces/user.interface';
 import { IPostJob } from '@post/interfaces/post.interface';
+import { IReactionJob } from '@reaction/interfaces/reactions.interface';
 
-type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJob;
+type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJob | IReactionJob;
 
 let bullAdapters: BullAdapter[] = [];
 

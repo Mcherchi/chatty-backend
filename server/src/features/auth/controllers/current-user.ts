@@ -1,10 +1,8 @@
 import { userService } from '@service/db/user.service';
-import { UserCache } from '@service/redis/user.cache';
+import { userCache } from '@service/redis/user.cache';
 import { IUserDocument } from '@user/interfaces/user.interface';
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-
-const userCache: UserCache = new UserCache();
 
 export class CurrentUser {
   public async currentUser(req: Request, res: Response): Promise<void> {

@@ -10,12 +10,10 @@ import { BadRequestError } from '@global/helpers/error-handler';
 import { Helpers } from '@global/helpers/helpers';
 import { upload } from '@global/helpers/cloudinary-upload';
 import { IUserDocument } from '@user/interfaces/user.interface';
-import { UserCache } from '@service/redis/user.cache';
+import { userCache } from '@service/redis/user.cache';
 import { authQueue } from '@service/queues/auth.queue';
 import { userQueue } from '@service/queues/user.queue';
 // import { omit } from 'lodash';
-
-const userCache: UserCache = new UserCache();
 
 export class SignUp {
   @joiValidation(signupSchema)

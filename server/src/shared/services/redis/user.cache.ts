@@ -2,7 +2,6 @@ import { IUserDocument } from '@user/interfaces/user.interface';
 import { BaseCache } from '@service/redis/base.cache';
 import { ServerError } from '@global/helpers/error-handler';
 import { Helpers } from '@global/helpers/helpers';
-
 export class UserCache extends BaseCache {
   constructor() {
     super('userCache');
@@ -99,3 +98,5 @@ export class UserCache extends BaseCache {
     }
   }
 }
+
+export const userCache: UserCache = new UserCache();
