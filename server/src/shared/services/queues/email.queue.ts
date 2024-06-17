@@ -1,5 +1,5 @@
 import { IEmailJob } from '@user/interfaces/user.interface';
-import { BaseQueue } from './base.queue';
+import { BaseQueue } from '@service/queues/base.queue';
 import { emailWorker } from '@worker/email.worker';
 
 class EmailQueue extends BaseQueue {

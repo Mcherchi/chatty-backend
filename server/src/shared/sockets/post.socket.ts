@@ -1,3 +1,5 @@
+import { ICommentDocument } from '@comment/interfaces/comment.interface';
+import { IReactionDocument } from '@reaction/interfaces/reactions.interface';
 import { Server, Socket } from 'socket.io';
 
 let socketIOPostObject: Server;
@@ -11,8 +13,14 @@ export class SocketIOPostHandler {
   }
 
   public listen(): void {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    this.io.on('connection', (socket: Socket) => {});
+    this.io.on('connection', (socket: Socket) => {
+      socket.on('reaction', (reaction: IReactionDocument) => {
+        this.io.emit('update reaction', reaction);
+      });
+      socket.on('comment', (comment: ICommentDocument) => {
+        this.io.emit('update comment', comment);
+      });
+    });
   }
 }
 

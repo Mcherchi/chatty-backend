@@ -1,5 +1,5 @@
 import { reactionWorker } from '@worker/reaction.worker';
-import { BaseQueue } from './base.queue';
+import { BaseQueue } from '@service/queues/base.queue';
 import { IReactionJob } from '@reaction/interfaces/reactions.interface';
 
 class ReactionQueue extends BaseQueue {
