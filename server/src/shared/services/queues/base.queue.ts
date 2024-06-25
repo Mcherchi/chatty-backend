@@ -9,8 +9,9 @@ import { IEmailJob, IUserJob } from '@user/interfaces/user.interface';
 import { IPostJob } from '@post/interfaces/post.interface';
 import { IReactionJob } from '@reaction/interfaces/reactions.interface';
 import { ICommentJob } from '@comment/interfaces/comment.interface';
+import { IBlockedUserJobData, IFollowerJobData } from '@follower/interfaces/follower.interface';
 
-type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJob | IReactionJob | ICommentJob;
+type IBaseJobData = IAuthJob | IUserJob | IEmailJob | IPostJob | IReactionJob | ICommentJob | IFollowerJobData | IBlockedUserJobData;
 
 let bullAdapters: BullAdapter[] = [];
 
