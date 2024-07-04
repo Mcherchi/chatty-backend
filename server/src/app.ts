@@ -26,7 +26,7 @@ class Application {
       Application.shutDownProperly(1);
     });
 
-    process.on('unhandleRejection', (reason: Error) => {
+    process.on('unhandledRejection', (reason: Error) => {
       log.error(`Unhandled rejection at promise: ${reason}`);
       Application.shutDownProperly(2);
     });
