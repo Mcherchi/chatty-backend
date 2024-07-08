@@ -24,6 +24,11 @@ export class Helpers {
     return regexExp.test(email);
   }
 
+  static isDataURL(value: string): boolean {
+    const regexExp = /^\s*data:([a-z]+\/[a-z0-9-+.]+(;[a-z-]+=[a-z0-9-]+)?)?(;base64)?,([a-z0-9!$&',()*+;=\-._~:@\\/?%\s]*)\s*$/i;
+    return regexExp.test(value);
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   static parseJson(prop: string): any {
     try {

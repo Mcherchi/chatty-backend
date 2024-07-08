@@ -53,6 +53,10 @@ class UserService {
       profilePicture: 1
     };
   }
+
+  public async removeUserBackgroundImage(userId: string): Promise<void> {
+    await UserModel.updateOne({ _id: userId }, { $set: { bgImageId: '', bgImageVersion: '' } }).exec();
+  }
 }
 
 export const userService: UserService = new UserService();
